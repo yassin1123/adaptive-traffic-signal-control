@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# C build artifacts
+radar_node/build/
+*.exe
+*.o
+*.obj
+*.out
+
+# Runtime-emitted artifacts
+radar_node/node_output.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
