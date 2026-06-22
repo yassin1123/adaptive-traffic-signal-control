@@ -17,10 +17,9 @@ An end-to-end adaptive traffic-signal system in two halves that meet at a single
 The radar's output JSON is **exactly** what the brain ingests — proven by an
 integration check that imports the brain's own approach vocabulary.
 
-![Live side-by-side: fixed-timer gridlock vs adaptive flow](docs/demo.png)
-
-*Live side-by-side: the fixed-timer grid (left) gridlocks under rush while the
-adaptive grid (right) stays flowing — `visualize.py`.*
+**▶ [Watch the demo video](docs/demo.mp4)** — live side-by-side: the fixed-timer
+grid (left) gridlocks under rush while the adaptive grid (right) stays flowing
+(`visualize.py`).
 
 ---
 
