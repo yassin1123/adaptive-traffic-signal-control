@@ -1,5 +1,7 @@
 # Adaptive Traffic Signal Control
 
+> 🏆 **First place — High-Performance Infrastructure & Hardware track**, Urban Friction 48-Hour Systems & Solutions Hackathon (London).
+
 An end-to-end adaptive traffic-signal system in two halves that meet at a single,
 **verified** contract:
 
@@ -14,6 +16,11 @@ An end-to-end adaptive traffic-signal system in two halves that meet at a single
 
 The radar's output JSON is **exactly** what the brain ingests — proven by an
 integration check that imports the brain's own approach vocabulary.
+
+![Live side-by-side: fixed-timer gridlock vs adaptive flow](docs/demo.png)
+
+*Live side-by-side: the fixed-timer grid (left) gridlocks under rush while the
+adaptive grid (right) stays flowing — `visualize.py`.*
 
 ---
 
@@ -34,6 +41,20 @@ grid stays stable (zero spillback) and self-balances across intersections with
 **no central coordinator** (coordination emerges from neighbours reacting to each
 other's outflow). Pedestrian wait is structurally bounded and never traded away
 for the car metric.
+
+---
+
+## Built with rigour
+
+Every signal-processing stage is verified against **synthetic ground truth in
+physical units**: a target injected at 40 m must make the chain report 40 m — not
+"the bin we defined as 40 m" — so the tests close against physics, not against
+their own conventions. That discipline caught real bugs a self-consistent test
+would have happily passed: a flipped FFT sign convention, a real-vs-complex
+spectrum assumption in the range search, a buffer overrun in the DBSCAN
+expansion, and a vehicle/pedestrian classification feature that turned out not to
+discriminate at all. Each was found because the assertion was in metres, m/s, and
+degrees — which is why the "verified" claims here are trustworthy.
 
 ---
 
@@ -82,8 +103,8 @@ python visualize.py                # live pygame visual (pip install pygame)
 ### The radar firmware (C11, on the host)
 
 ```bash
-make -C radar_node run              # end-to-end: full chain on a synthetic scene
-make -C radar_node run-phase1       # ... per-stage verification (phases 1..6)
+make -C radar_node run              # phase 7: end-to-end full chain on a synthetic scene
+make -C radar_node run-phase1       # per-stage verification: run-phase1 .. run-phase6 (phases 1-6)
 python radar_node/check_brain_contract.py   # radar output == brain input
 ```
 
